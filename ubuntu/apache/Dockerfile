@@ -1,6 +1,6 @@
-LABEL org.opencontainers.image.authors="SvenDowideit@home.org.au"
 
 FROM ubuntu:20.04
+LABEL com.repasscloud.image.authors="hello@repasscloud.com"
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt. -y update; \
   apt-get install -y --no-install-recommends tzdata; \
