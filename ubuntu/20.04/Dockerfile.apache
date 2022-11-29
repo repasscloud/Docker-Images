@@ -1,4 +1,3 @@
-
 FROM ubuntu:20.04
 LABEL com.repasscloud.image.authors="hello@repasscloud.com"
 ARG DEBIAN_FRONTEND=noninteractive

@@ -21,4 +21,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Alpine 3.16
-      run: docker build --rm --no-cache --tag repasscloud/alpine-3.16:httpd --file Dockerfile.apache ./alpine/3.16
+      run: docker build --rm --no-cache --tag repasscloud/alpine-3.16:httpd --file Dockerfile.httpd ./alpine/3.16
