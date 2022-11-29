@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build all Docker images
-      run: for f in $(find . -name '*.sh'); do sh "$f"; done
+      run: ./ubuntu-20.04/apache/build.sh
