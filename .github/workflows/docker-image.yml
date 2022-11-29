@@ -1,18 +1,24 @@
 name: Docker Image CI
 
 on:
+  schedule:
+    - cron: '0 3 * * *'
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
 jobs:
-
-  build:
-
+  ubuntu:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
-    - name: Ubuntu 20.04 Apache
-      run: docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:apache ./ubuntu-20.04/apache
+    - name: Ubuntu 20.04
+      run: docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:apache --file Dockerfile.apache ./ubuntu/20.04
+
+  alpine:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Alpine 3.16
+      run: docker build --rm --no-cache --tag repasscloud/alpine-3.16:httpd --file Dockerfile.apache ./alpine/3.16

@@ -1,0 +1,7 @@
+FROM httpd:alpine3.16
+LABEL com.repasscloud.image.authors="hello@repasscloud.com"
+RUN apk add --no-cache apache2
+RUN { \
+  echo 'IncludeOptional conf.d/*.conf'; \
+} >> /usr/local/apache2/conf/httpd.conf \
+  && mkdir /usr/local/apache2/conf.d
