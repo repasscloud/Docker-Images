@@ -2,7 +2,7 @@
 FROM ubuntu:20.04
 LABEL com.repasscloud.image.authors="hello@repasscloud.com"
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt. -y update; \
+RUN apt -y update; \
   apt-get install -y --no-install-recommends tzdata; \
   apt -y upgrade; \
   apt -y install apache2; \
