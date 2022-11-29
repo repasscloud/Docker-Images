@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build ./ubuntu/apache/ --file Dockerfile --tag repasscloud/ubuntu.apache
+      run: docker build . --file ubuntu/apache/Dockerfile --tag repasscloud/ubuntu.apache
