@@ -22,6 +22,11 @@ jobs:
       run: |
         docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:apache --file ./ubuntu/20.04/Dockerfile.apache ./ubuntu/20.04
         docker push repasscloud/ubuntu-20.04:apache
+    - name: Ubuntu 20.04 kubuntu-rdp
+      run: |
+        docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:kubuntu-rdp --file ./ubuntu/20.04/Dockerfile.kubuntu-rdp ./ubuntu/20.04
+        docker push repasscloud/ubuntu-20.04:kubuntu-rdp
+      
 
   alpine:
     runs-on: ubuntu-latest
