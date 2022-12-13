@@ -7,6 +7,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   ubuntu:
@@ -41,5 +42,3 @@ jobs:
       run: |
         docker build --rm --no-cache --tag repasscloud/alpine-3.16:httpd --file ./alpine/3.16/Dockerfile.httpd ./alpine/3.16
         docker push repasscloud/alpine-3.16:httpd
-
-       
