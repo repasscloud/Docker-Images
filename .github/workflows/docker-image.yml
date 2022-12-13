@@ -22,11 +22,13 @@ jobs:
     - name: ubuntu 20.04
       shell: pwsh
       run: |
-        [string]$dfiles = Get-ChildItem -Path ./ubuntu/20.04 -File -Filter "Dockerfile.*"
-        foreach ($dfile in $dfiles) {
-          $fname = $dfile.Name; $fpath = $dfile.FullName; $img = $dfile.Name.Split('.')[1];
-          docker build --rm --no-cache --tag "repasscloud/ubuntu-20.04:${img}" --file $fpath ./ubuntu/20.04;
-          docker push "repasscloud/ubuntu-20.04:${img}"
+        $files = Get-ChildItem -Path ./ubuntu/20.04/ -Filter "Dockerfile.*"
+        foreach ($f in $files)
+        {
+            $filename = $f.Name
+            $filepath = $f.FullName
+            $ext = $f.Name.Split('.')[1]
+            docker build --rm --no-cache --tag "repasscloud/ubuntu-20.04:${ext}" --file $filename ./ubuntu/20.04
         }
 
   alpine:
