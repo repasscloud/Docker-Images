@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: alpine
 
 on:
   schedule:
@@ -10,6 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
+
   alpine-316-httpd:
     runs-on: ubuntu-latest
     steps:
