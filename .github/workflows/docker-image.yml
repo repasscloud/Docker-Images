@@ -41,7 +41,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Alpine 3.16 httpd
+    - name: alpine 3.16 httpd
       run: |
         docker build --rm --no-cache --tag repasscloud/alpine-3.16:httpd --file ./alpine/3.16/Dockerfile.httpd ./alpine/3.16
         docker push repasscloud/alpine-3.16:httpd
