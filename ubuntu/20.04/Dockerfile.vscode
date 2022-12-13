@@ -1,0 +1,10 @@
+FROM ubuntu:20.04
+
+# RUN echo 'DPkg::Post-Invoke {"/bin/rm -f /var/cache/apt/archives/*.deb || true";};' | tee /etc/apt/apt.conf.d/clean && \
+RUN apt update && \
+  apt -y install curl && \
+  curl -fsSL https://code-server.dev/install.sh | sh
+
+ENV PASSWORD=changeme
+EXPOSE 8080
+ENTRYPOINT [ "code-server" ]

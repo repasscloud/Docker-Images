@@ -18,15 +18,15 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Ubuntu 20.04
+    - name: ubuntu 20.04
+      shell: pwsh
       run: |
-        docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:apache --file ./ubuntu/20.04/Dockerfile.apache ./ubuntu/20.04
-        docker push repasscloud/ubuntu-20.04:apache
-    - name: Ubuntu 20.04 kubuntu-rdp
-      run: |
-        docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:kubuntu-rdp --file ./ubuntu/20.04/Dockerfile.kubuntu-rdp ./ubuntu/20.04
-        docker push repasscloud/ubuntu-20.04:kubuntu-rdp
-      
+        [string]$dfiles = Get-ChildItem -Path ./ubuntu/20.04 -File -Filter "Dockerfile.*"
+        foreach ($dfile in $dfiles) {
+          $fname = $dfile.Name; $fpath = $dfile.FullName; $img = $dfile.Name.Split('.')[1];
+          docker build --rm --no-cache --tag "repasscloud/ubuntu-20.04:${img}" --file $fpath ./ubuntu/20.04;
+          docker push "repasscloud/ubuntu-20.04:${img}"
+        }
 
   alpine:
     runs-on: ubuntu-latest
@@ -41,9 +41,5 @@ jobs:
       run: |
         docker build --rm --no-cache --tag repasscloud/alpine-3.16:httpd --file ./alpine/3.16/Dockerfile.httpd ./alpine/3.16
         docker push repasscloud/alpine-3.16:httpd
-    - name: Alpine 3.16 vscode
-      run: |
-        docker build --rm --no-cache --tag repasscloud/alpine-3.16:vscode --file ./alpine/3.16/Dockerfile.vscode ./alpine/3.16
-        docker push repasscloud/alpine-3.16:vscode
 
        
