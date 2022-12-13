@@ -10,7 +10,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  ubuntu:
+
+  ubuntu-2004-apache:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -23,16 +24,8 @@ jobs:
       run: |
         docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:apache --file ./ubuntu/20.04/Dockerfile.apache ./ubuntu/20.04
         docker push repasscloud/ubuntu-20.04:apache
-    - name: ubuntu 20.04 kubuntu-rdp
-      run: |
-        docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:kubuntu-rdp --file ./ubuntu/20.04/Dockerfile.kubuntu-rdp ./ubuntu/20.04
-        docker push repasscloud/ubuntu-20.04:kubuntu-rdp
-    - name: ubuntu 20.04 vscode
-      run: |
-        docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:vscode --file ./ubuntu/20.04/Dockerfile.vscode ./ubuntu/20.04
-        docker push repasscloud/ubuntu-20.04:vscode
 
-  alpine:
+  ubuntu-2004-kubuntu-rdp:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -41,7 +34,21 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: alpine 3.16 httpd
+    - name: ubuntu 20.04 kubuntu-rdp
       run: |
-        docker build --rm --no-cache --tag repasscloud/alpine-3.16:httpd --file ./alpine/3.16/Dockerfile.httpd ./alpine/3.16
-        docker push repasscloud/alpine-3.16:httpd
+        docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:kubuntu-rdp --file ./ubuntu/20.04/Dockerfile.kubuntu-rdp ./ubuntu/20.04
+        docker push repasscloud/ubuntu-20.04:kubuntu-rdp
+
+  ubuntu-2004-vscode:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Login to Dockerhub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: ubuntu 20.04 vscode
+      run: |
+        docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:vscode --file ./ubuntu/20.04/Dockerfile.vscode ./ubuntu/20.04
+        docker push repasscloud/ubuntu-20.04:vscode

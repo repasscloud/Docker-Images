@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  alpine-316-httpd:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Login to Dockerhub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: alpine 3.16 httpd
+      run: |
+        docker build --rm --no-cache --tag repasscloud/alpine-3.16:httpd --file ./alpine/3.16/Dockerfile.httpd ./alpine/3.16
+        docker push repasscloud/alpine-3.16:httpd
