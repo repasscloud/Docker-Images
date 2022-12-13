@@ -19,17 +19,18 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: ubuntu 20.04
-      shell: pwsh
+    - name: ubuntu 20.04 apache
       run: |
-        $files = Get-ChildItem -Path ./ubuntu/20.04/ -Filter "Dockerfile.*"
-        foreach ($f in $files)
-        {
-            $filename = $f.Name
-            $filepath = $f.FullName
-            $ext = $f.Name.Split('.')[1]
-            docker build --rm --no-cache --tag "repasscloud/ubuntu-20.04:${ext}" --file $filename ./ubuntu/20.04
-        }
+        docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:apache --file ./ubuntu/20.04/Dockerfile.apache ./ubuntu/20.04
+        docker push repasscloud/ubuntu-20.04:apache
+    - name: ubuntu 20.04 kubuntu-rdp
+      run: |
+        docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:kubuntu-rdp --file ./ubuntu/20.04/Dockerfile.kubuntu-rdp ./ubuntu/20.04
+        docker push repasscloud/ubuntu-20.04:kubuntu-rdp
+    - name: ubuntu 20.04 vscode
+      run: |
+        docker build --rm --no-cache --tag repasscloud/ubuntu-20.04:vscode --file ./ubuntu/20.04/Dockerfile.vscode ./ubuntu/20.04
+        docker push repasscloud/ubuntu-20.04:vscode
 
   alpine:
     runs-on: ubuntu-latest
