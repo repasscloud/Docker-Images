@@ -2,7 +2,7 @@ name: alpine
 
 on:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 3 * * 4'
   push:
     branches: [ "main" ]
   pull_request:
